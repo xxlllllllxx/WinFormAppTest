@@ -14,7 +14,6 @@ namespace SPTC_Information_Management
         public Form1()
         {
             InitializeComponent();
-            //Comment
         }
 
         private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
