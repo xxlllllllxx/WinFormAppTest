@@ -53,7 +53,10 @@ namespace SPTC_Information_Management
             }
         }
 
-
-
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DesignForm form = new DesignForm();
+            form.Show();
+        }
     }
 }
