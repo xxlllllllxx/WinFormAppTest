@@ -32,6 +32,8 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.foldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iDsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.captureImageToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.printIDToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mTOPToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.operatorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -104,11 +106,28 @@
             // 
             // iDsToolStripMenuItem
             // 
+            this.iDsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.captureImageToolStripMenuItem,
+            this.printIDToolStripMenuItem});
             this.iDsToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.iDsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("iDsToolStripMenuItem.Image")));
             this.iDsToolStripMenuItem.Name = "iDsToolStripMenuItem";
             this.iDsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.iDsToolStripMenuItem.Text = "ID\'s";
+            // 
+            // captureImageToolStripMenuItem
+            // 
+            this.captureImageToolStripMenuItem.Name = "captureImageToolStripMenuItem";
+            this.captureImageToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.captureImageToolStripMenuItem.Text = "Capture Image";
+            this.captureImageToolStripMenuItem.Click += new System.EventHandler(this.captureImageToolStripMenuItem_Click);
+            // 
+            // printIDToolStripMenuItem
+            // 
+            this.printIDToolStripMenuItem.Name = "printIDToolStripMenuItem";
+            this.printIDToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.printIDToolStripMenuItem.Text = "Print ID";
+            this.printIDToolStripMenuItem.Click += new System.EventHandler(this.printIDToolStripMenuItem_Click);
             // 
             // mTOPToolStripMenuItem
             // 
@@ -472,6 +491,8 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolStripMenuItem captureImageToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem printIDToolStripMenuItem;
     }
 }
 
