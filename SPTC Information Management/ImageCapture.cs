@@ -53,11 +53,10 @@ namespace SPTC_Information_Management
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image != null)
-            {
+            
                 Bitmap bitmap = new Bitmap(pictureBox1.Image);
                 bitmap.Save("capture.jpg");
-            }
+            
         }
 
 
