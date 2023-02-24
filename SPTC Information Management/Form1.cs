@@ -6,68 +6,171 @@ using System.Drawing;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Management;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Linq;
+using System;
+using System.ComponentModel;
+using System.Net.NetworkInformation;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace SPTC_Information_Management
 {
-    public partial class Form1 : Form
-    {
-        public Form1()
-        {
-            InitializeComponent();
-        }
+	public partial class Form1 : Form
+	{
+		public Form1()
+		{
+			InitializeComponent();
 
-        private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
-        {
-            var tabControl = (TabControl)sender;
-            var tabPage = tabControl.TabPages[e.Index];
-            var rect = tabControl.GetTabRect(e.Index);
+			backgroundWorker = new BackgroundWorker();
+			backgroundWorker.WorkerReportsProgress = true;
+			backgroundWorker.DoWork += BackgroundWorker_DoWork;
+			backgroundWorker.ProgressChanged += BackgroundWorker_ProgressChanged;
+			backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+		}
 
-            // Draw the tab background
-            e.Graphics.FillRectangle(SystemBrushes.Control, e.Bounds);
+		private void tabControl1_DrawItem(object sender, DrawItemEventArgs e)
+		{
+			var tabControl = (TabControl)sender;
+			var tabPage = tabControl.TabPages[e.Index];
+			var rect = tabControl.GetTabRect(e.Index);
 
-            // Draw the close (x) icon
-            using (var pen = new Pen(Color.Black, 2))
-            using (var brush = new SolidBrush(Color.Black))
-            {
-                e.Graphics.DrawLine(pen, rect.Right - 15, rect.Top + 5, rect.Right - 5, rect.Top + 15);
-                e.Graphics.DrawLine(pen, rect.Right - 15, rect.Top + 15, rect.Right - 5, rect.Top + 5);
-            }
+			// Draw the tab background
+			e.Graphics.FillRectangle(SystemBrushes.Control, e.Bounds);
 
-            // Draw the tab text
-            TextRenderer.DrawText(e.Graphics, tabPage.Text, tabControl.Font,
-              rect, tabControl.ForeColor, TextFormatFlags.Left);
-        }
+			// Draw the close (x) icon
+			using (var pen = new Pen(Color.Black, 2))
+			using (var brush = new SolidBrush(Color.Black))
+			{
+				e.Graphics.DrawLine(pen, rect.Right - 15, rect.Top + 5, rect.Right - 5, rect.Top + 15);
+				e.Graphics.DrawLine(pen, rect.Right - 15, rect.Top + 15, rect.Right - 5, rect.Top + 5);
+			}
+
+			// Draw the tab text
+			TextRenderer.DrawText(e.Graphics, tabPage.Text, tabControl.Font,
+			  rect, tabControl.ForeColor, TextFormatFlags.Left);
+		}
 
 
-        private void tabControl1_MouseClick(object sender, MouseEventArgs e)
-        {
-            var tabControl = (TabControl)sender;
-            for (int i = 0; i < tabControl.TabPages.Count; i++)
-            {
-                var rect = tabControl.GetTabRect(i);
-                if (rect.Contains(e.Location) && e.Location.X > rect.Right - 20)
-                {
-                    tabControl.TabPages.RemoveAt(i);
-                    break;
-                }
-            }
-        }
+		private void tabControl1_MouseClick(object sender, MouseEventArgs e)
+		{
+			var tabControl = (TabControl)sender;
+			for (int i = 0; i < tabControl.TabPages.Count; i++)
+			{
+				var rect = tabControl.GetTabRect(i);
+				if (rect.Contains(e.Location) && e.Location.X > rect.Right - 20)
+				{
+					tabControl.TabPages.RemoveAt(i);
+					break;
+				}
+			}
+		}
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-           
-        }
+		private void button1_Click(object sender, EventArgs e)
+		{
 
-        private void printIDToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DesignForm form = new DesignForm();
-            form.Show();
-        }
+		}
 
-        private void captureImageToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ImageCapture form = new ImageCapture();
-            form.Show();
-        }
-    }
+		private void printIDToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			DesignForm form = new DesignForm();
+			form.Show();
+		}
+
+		private void captureImageToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			ImageCapture form = new ImageCapture();
+			form.Show();
+		}
+
+		private void nudMin_ValueChanged(object sender, EventArgs e)
+		{
+			nudMax.Value = nudMin.Value;
+		}
+
+		private BackgroundWorker backgroundWorker;
+
+			private async void button2_Click(object sender, EventArgs e)
+			{
+				try
+				{
+					comboBox1.Items.Clear();
+					progressBar1.Value = 0;
+					progressBar1.Visible = true;
+
+					var from = (int)nudMin.Value | 0;
+					var to = (int)nudMax.Value | 255;
+
+					var tasks = new Task<bool>[to - from];
+
+					for (int i = from; i <= to; i++)
+					{
+						var ip = "192.168.0." + i;
+						tasks[i - from] = PingIpAddressAsync(ip);
+
+						if (i % 10 == 0)
+						{
+							await Task.WhenAll(tasks);
+							backgroundWorker.ReportProgress((int)(((float)i - from) / (to - from) * 100));
+						}
+					}
+
+					await Task.WhenAll(tasks);
+					backgroundWorker.ReportProgress(100);
+				} catch (Exception err)
+				{
+					MessageBox.Show(err.ToString());
+				}
+			}
+
+			private async Task<bool> PingIpAddressAsync(string ipAddress)
+			{
+				using (var ping = new Ping())
+				{
+					try
+					{
+						var reply = await ping.SendPingAsync(ipAddress, 1000);
+
+						if (reply.Status == IPStatus.Success)
+						{
+							return true;
+						}
+					}
+					catch (Exception ex)
+					{
+					MessageBox.Show(ex.Message);
+					}
+				}
+
+				return false;
+			}
+
+			private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+			{
+				var tasks = (Task<bool>[])e.Argument;
+
+				for (int i = 0; i < tasks.Length; i++)
+				{
+					tasks[i].Wait();
+					backgroundWorker.ReportProgress((int)(((float)i / tasks.Length) * 100));
+				}
+			}
+
+			private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+			{
+				progressBar1.Value = e.ProgressPercentage;
+			}
+
+			private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+			{
+				progressBar1.Visible = false;
+			}
+
+		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+		{
+
+		}
+	}
 }
