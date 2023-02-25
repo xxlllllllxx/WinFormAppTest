@@ -15,11 +15,15 @@ using System.ComponentModel;
 using System.Net.NetworkInformation;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.Http;
+using System.Text;
 
 namespace SPTC_Information_Management
 {
 	public partial class Form1 : Form
 	{
+
+		private string mServerIP = "localhost";
 		public Form1()
 		{
 			InitializeComponent();
@@ -92,85 +96,126 @@ namespace SPTC_Information_Management
 
 		private BackgroundWorker backgroundWorker;
 
-			private async void button2_Click(object sender, EventArgs e)
+		private async void button2_Click(object sender, EventArgs e)
+		{
+			try
 			{
-				try
+				comboBox1.Items.Clear();
+				progressBar1.Value = 0;
+				progressBar1.Visible = true;
+
+				var from = (int)nudMin.Value | 0;
+				var to = (int)nudMax.Value | 255;
+
+				var tasks = new Task<bool>[to - from + 1];
+
+				for (int i = from; i <= to; i++)
 				{
-					comboBox1.Items.Clear();
-					progressBar1.Value = 0;
-					progressBar1.Visible = true;
-
-					var from = (int)nudMin.Value | 0;
-					var to = (int)nudMax.Value | 255;
-
-					var tasks = new Task<bool>[to - from];
-
-					for (int i = from; i <= to; i++)
+					var ip = "192.168.0." + i;
+					var task = PingIpAddressAsync(ip);
+					if (task != null)
 					{
-						var ip = "192.168.0." + i;
-						tasks[i - from] = PingIpAddressAsync(ip);
+						tasks[i - from] = task;
 
 						if (i % 10 == 0)
 						{
-							await Task.WhenAll(tasks);
+							await Task.WhenAll(tasks.Where(t => t != null));
 							backgroundWorker.ReportProgress((int)(((float)i - from) / (to - from) * 100));
 						}
 					}
+				}
+				await Task.WhenAll(tasks.Where(t => t != null));
+				backgroundWorker.ReportProgress(100);
 
-					await Task.WhenAll(tasks);
-					backgroundWorker.ReportProgress(100);
-				} catch (Exception err)
+
+			} catch (Exception err)
+			{
+				MessageBox.Show(err.ToString());
+			}
+		}
+
+		private async Task<bool> PingIpAddressAsync(string ipAddress)
+		{
+			using (var ping = new Ping())
+			{
+				var reply = await ping.SendPingAsync(ipAddress, 1000);
+
+				if (reply.Status == IPStatus.Success)
 				{
-					MessageBox.Show(err.ToString());
+					comboBox1.Items.Add(ipAddress);
+					return true;
 				}
 			}
 
-			private async Task<bool> PingIpAddressAsync(string ipAddress)
+			return false;
+		}
+
+		private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+		{
+			var tasks = (Task<bool>[])e.Argument;
+
+			for (int i = 0; i < tasks.Length; i++)
 			{
-				using (var ping = new Ping())
-				{
-					try
-					{
-						var reply = await ping.SendPingAsync(ipAddress, 1000);
-
-						if (reply.Status == IPStatus.Success)
-						{
-							return true;
-						}
-					}
-					catch (Exception ex)
-					{
-					MessageBox.Show(ex.Message);
-					}
-				}
-
-				return false;
+				tasks[i].Wait();
+				backgroundWorker.ReportProgress((int)(((float)i / tasks.Length) * 100));
 			}
+		}
 
-			private void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-			{
-				var tasks = (Task<bool>[])e.Argument;
+		private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
+		{
+			progressBar1.Value = e.ProgressPercentage;
+		}
 
-				for (int i = 0; i < tasks.Length; i++)
-				{
-					tasks[i].Wait();
-					backgroundWorker.ReportProgress((int)(((float)i / tasks.Length) * 100));
-				}
-			}
-
-			private void BackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
-			{
-				progressBar1.Value = e.ProgressPercentage;
-			}
-
-			private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-			{
-				progressBar1.Visible = false;
-			}
+		private void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+		{
+			progressBar1.Visible = false;
+		}
 
 		private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
 		{
+			mServerIP = comboBox1.SelectedItem.ToString();
+		}
 
+		private async void button7_Click(object sender, EventArgs e)
+		{
+			string uri = "";
+			try {
+				// Get the IP address of the first network interface that is up and has an IPv4 address
+				var ip = NetworkInterface
+					.GetAllNetworkInterfaces()
+					.Where(i => i.OperationalStatus == OperationalStatus.Up && i.NetworkInterfaceType != NetworkInterfaceType.Loopback)
+					.SelectMany(i => i.GetIPProperties().UnicastAddresses)
+					.FirstOrDefault(a => a.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)?.Address;
+
+				// Convert the IP address to a string
+				var ipAddress = ip?.ToString() ?? "Unknown";
+
+				if(ipAddress == mServerIP)
+				{
+					mServerIP = "localhost";
+				}
+				// Create a new HttpClient instance
+				HttpClient client = new HttpClient();
+
+				string username = tbUsername.Text.ToString();
+				string password = tbPassword.Text.ToString();
+
+				// Set the request URI and content
+				uri = "http://" + mServerIP + "/server/sptc/login.php";
+				var content = new StringContent("username=" + username + "&password=" + password, Encoding.UTF8, "application/x-www-form-urlencoded");
+
+				// Send the POST request and wait for the response
+				HttpResponseMessage response = await client.PostAsync(uri, content);
+
+				// Get the response content as a string
+				string responseString = await response.Content.ReadAsStringAsync();
+
+				// Display the response
+				MessageBox.Show(responseString);
+
+			} catch(Exception ex){
+				MessageBox.Show(ex.Message + "\nURI: " + uri);
+			}
 		}
 	}
 }

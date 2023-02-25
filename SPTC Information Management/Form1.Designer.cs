@@ -30,28 +30,28 @@
         {
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-			System.Windows.Forms.TreeNode treeNode27 = new System.Windows.Forms.TreeNode("Node4");
-			System.Windows.Forms.TreeNode treeNode28 = new System.Windows.Forms.TreeNode("Node5");
-			System.Windows.Forms.TreeNode treeNode29 = new System.Windows.Forms.TreeNode("Node6");
-			System.Windows.Forms.TreeNode treeNode30 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
-            treeNode27,
-            treeNode28,
-            treeNode29});
-			System.Windows.Forms.TreeNode treeNode31 = new System.Windows.Forms.TreeNode("Node7");
-			System.Windows.Forms.TreeNode treeNode32 = new System.Windows.Forms.TreeNode("Node8");
-			System.Windows.Forms.TreeNode treeNode33 = new System.Windows.Forms.TreeNode("Node9");
-			System.Windows.Forms.TreeNode treeNode34 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
-            treeNode31,
-            treeNode32,
-            treeNode33});
-			System.Windows.Forms.TreeNode treeNode35 = new System.Windows.Forms.TreeNode("Node10");
-			System.Windows.Forms.TreeNode treeNode36 = new System.Windows.Forms.TreeNode("Node2", new System.Windows.Forms.TreeNode[] {
-            treeNode35});
-			System.Windows.Forms.TreeNode treeNode37 = new System.Windows.Forms.TreeNode("Node11");
-			System.Windows.Forms.TreeNode treeNode38 = new System.Windows.Forms.TreeNode("Node12");
-			System.Windows.Forms.TreeNode treeNode39 = new System.Windows.Forms.TreeNode("Node3", new System.Windows.Forms.TreeNode[] {
-            treeNode37,
-            treeNode38});
+			System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Node4");
+			System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Node5");
+			System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Node6");
+			System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Node0", new System.Windows.Forms.TreeNode[] {
+            treeNode1,
+            treeNode2,
+            treeNode3});
+			System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Node7");
+			System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Node8");
+			System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Node9");
+			System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Node1", new System.Windows.Forms.TreeNode[] {
+            treeNode5,
+            treeNode6,
+            treeNode7});
+			System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("Node10");
+			System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("Node2", new System.Windows.Forms.TreeNode[] {
+            treeNode9});
+			System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Node11");
+			System.Windows.Forms.TreeNode treeNode12 = new System.Windows.Forms.TreeNode("Node12");
+			System.Windows.Forms.TreeNode treeNode13 = new System.Windows.Forms.TreeNode("Node3", new System.Windows.Forms.TreeNode[] {
+            treeNode11,
+            treeNode12});
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.foldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.iDsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -135,6 +135,12 @@
 			this.fdfgdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.gfgdToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.dfgdgToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.label3 = new System.Windows.Forms.Label();
+			this.tbUsername = new System.Windows.Forms.TextBox();
+			this.tbPassword = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.button7 = new System.Windows.Forms.Button();
+			this.panel2 = new System.Windows.Forms.Panel();
 			this.menuStrip1.SuspendLayout();
 			this.tabControl1.SuspendLayout();
 			this.tabPage1.SuspendLayout();
@@ -146,6 +152,7 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
 			this.tabPage2.SuspendLayout();
 			this.contextMenuStrip1.SuspendLayout();
+			this.panel2.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// menuStrip1
@@ -482,6 +489,7 @@
 			this.tabPage1.Controls.Add(this.comboBox1);
 			this.tabPage1.Controls.Add(this.checkedListBox1);
 			this.tabPage1.Controls.Add(this.button2);
+			this.tabPage1.Controls.Add(this.panel2);
 			this.tabPage1.Location = new System.Drawing.Point(4, 22);
 			this.tabPage1.Name = "tabPage1";
 			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -550,7 +558,7 @@
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 39.17526F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 60.82474F));
 			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 95F));
-			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 59F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 60F));
 			this.tableLayoutPanel1.Controls.Add(this.button3, 0, 0);
 			this.tableLayoutPanel1.Controls.Add(this.button5, 1, 0);
 			this.tableLayoutPanel1.Controls.Add(this.button4, 2, 0);
@@ -567,14 +575,14 @@
 			// 
 			this.button3.Location = new System.Drawing.Point(3, 3);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(49, 23);
+			this.button3.Size = new System.Drawing.Size(48, 23);
 			this.button3.TabIndex = 0;
 			this.button3.Text = "button3";
 			this.button3.UseVisualStyleBackColor = true;
 			// 
 			// button5
 			// 
-			this.button5.Location = new System.Drawing.Point(58, 3);
+			this.button5.Location = new System.Drawing.Point(57, 3);
 			this.button5.Name = "button5";
 			this.button5.Size = new System.Drawing.Size(75, 23);
 			this.button5.TabIndex = 2;
@@ -583,7 +591,7 @@
 			// 
 			// button4
 			// 
-			this.button4.Location = new System.Drawing.Point(143, 3);
+			this.button4.Location = new System.Drawing.Point(142, 3);
 			this.button4.Name = "button4";
 			this.button4.Size = new System.Drawing.Size(75, 23);
 			this.button4.TabIndex = 1;
@@ -592,7 +600,7 @@
 			// 
 			// button6
 			// 
-			this.button6.Location = new System.Drawing.Point(238, 3);
+			this.button6.Location = new System.Drawing.Point(237, 3);
 			this.button6.Name = "button6";
 			this.button6.Size = new System.Drawing.Size(51, 23);
 			this.button6.TabIndex = 3;
@@ -610,37 +618,37 @@
 			// 
 			this.treeView1.Location = new System.Drawing.Point(448, 55);
 			this.treeView1.Name = "treeView1";
-			treeNode27.Name = "Node4";
-			treeNode27.Text = "Node4";
-			treeNode28.Name = "Node5";
-			treeNode28.Text = "Node5";
-			treeNode29.Name = "Node6";
-			treeNode29.Text = "Node6";
-			treeNode30.Name = "Node0";
-			treeNode30.Text = "Node0";
-			treeNode31.Name = "Node7";
-			treeNode31.Text = "Node7";
-			treeNode32.Name = "Node8";
-			treeNode32.Text = "Node8";
-			treeNode33.Name = "Node9";
-			treeNode33.Text = "Node9";
-			treeNode34.Name = "Node1";
-			treeNode34.Text = "Node1";
-			treeNode35.Name = "Node10";
-			treeNode35.Text = "Node10";
-			treeNode36.Name = "Node2";
-			treeNode36.Text = "Node2";
-			treeNode37.Name = "Node11";
-			treeNode37.Text = "Node11";
-			treeNode38.Name = "Node12";
-			treeNode38.Text = "Node12";
-			treeNode39.Name = "Node3";
-			treeNode39.Text = "Node3";
+			treeNode1.Name = "Node4";
+			treeNode1.Text = "Node4";
+			treeNode2.Name = "Node5";
+			treeNode2.Text = "Node5";
+			treeNode3.Name = "Node6";
+			treeNode3.Text = "Node6";
+			treeNode4.Name = "Node0";
+			treeNode4.Text = "Node0";
+			treeNode5.Name = "Node7";
+			treeNode5.Text = "Node7";
+			treeNode6.Name = "Node8";
+			treeNode6.Text = "Node8";
+			treeNode7.Name = "Node9";
+			treeNode7.Text = "Node9";
+			treeNode8.Name = "Node1";
+			treeNode8.Text = "Node1";
+			treeNode9.Name = "Node10";
+			treeNode9.Text = "Node10";
+			treeNode10.Name = "Node2";
+			treeNode10.Text = "Node2";
+			treeNode11.Name = "Node11";
+			treeNode11.Text = "Node11";
+			treeNode12.Name = "Node12";
+			treeNode12.Text = "Node12";
+			treeNode13.Name = "Node3";
+			treeNode13.Text = "Node3";
 			this.treeView1.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode30,
-            treeNode34,
-            treeNode36,
-            treeNode39});
+            treeNode4,
+            treeNode8,
+            treeNode10,
+            treeNode13});
 			this.treeView1.Size = new System.Drawing.Size(200, 227);
 			this.treeView1.TabIndex = 10;
 			// 
@@ -914,6 +922,60 @@
 			this.dfgdgToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
 			this.dfgdgToolStripMenuItem.Text = "dfgdg";
 			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(10, 15);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(59, 13);
+			this.label3.TabIndex = 22;
+			this.label3.Text = "username: ";
+			// 
+			// tbUsername
+			// 
+			this.tbUsername.Location = new System.Drawing.Point(79, 12);
+			this.tbUsername.Name = "tbUsername";
+			this.tbUsername.Size = new System.Drawing.Size(100, 20);
+			this.tbUsername.TabIndex = 23;
+			// 
+			// tbPassword
+			// 
+			this.tbPassword.Location = new System.Drawing.Point(79, 39);
+			this.tbPassword.Name = "tbPassword";
+			this.tbPassword.Size = new System.Drawing.Size(100, 20);
+			this.tbPassword.TabIndex = 25;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(10, 42);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(58, 13);
+			this.label4.TabIndex = 24;
+			this.label4.Text = "password: ";
+			// 
+			// button7
+			// 
+			this.button7.Location = new System.Drawing.Point(103, 66);
+			this.button7.Name = "button7";
+			this.button7.Size = new System.Drawing.Size(75, 23);
+			this.button7.TabIndex = 26;
+			this.button7.Text = "LOGIN";
+			this.button7.UseVisualStyleBackColor = true;
+			this.button7.Click += new System.EventHandler(this.button7_Click);
+			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.button7);
+			this.panel2.Controls.Add(this.tbPassword);
+			this.panel2.Controls.Add(this.label3);
+			this.panel2.Controls.Add(this.label4);
+			this.panel2.Controls.Add(this.tbUsername);
+			this.panel2.Location = new System.Drawing.Point(654, 175);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(191, 100);
+			this.panel2.TabIndex = 27;
+			// 
 			// Form1
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -945,6 +1007,8 @@
 			((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
 			this.tabPage2.ResumeLayout(false);
 			this.contextMenuStrip1.ResumeLayout(false);
+			this.panel2.ResumeLayout(false);
+			this.panel2.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -1035,6 +1099,12 @@
 		private System.Windows.Forms.NumericUpDown nudMax;
 		private System.Windows.Forms.NumericUpDown nudMin;
 		private System.Windows.Forms.ProgressBar progressBar1;
+		private System.Windows.Forms.TextBox tbUsername;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.TextBox tbPassword;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.Button button7;
 	}
 }
 
