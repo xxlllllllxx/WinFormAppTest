@@ -51,7 +51,7 @@ namespace SPTCProject
         private void button1_Click(object sender, EventArgs e)
         {
             
-            View.Tables.OperatorTable table = new View.Tables.OperatorTable();
+            View.Main table = new View.Main();
             table.ShowDialog();
             this.Close();
         }
