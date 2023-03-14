@@ -272,6 +272,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="View\Tables\OperatorTable.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\Tables\OperatorTable.Designer.cs">
+      <DependentUpon>OperatorTable.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -283,7 +289,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\Tables\OperatorTable.resx">
+      <DependentUpon>OperatorTable.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -297,6 +307,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Models\" />
+    <Folder Include="View\Forms\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SAMPLE UI copy.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SAMPLE UI copy2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\SAMPLE UI copy3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

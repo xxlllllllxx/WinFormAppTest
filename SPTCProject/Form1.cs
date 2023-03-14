@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceStack;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,5 +22,39 @@ namespace SPTCProject
         {
             //hello
         }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if(e.KeyChar== 13)
+            {
+                textBox2.Focus();
+            }
+        }
+
+        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == 13)
+            {
+                button1.Focus();
+                button1.PerformClick();
+            }
+        }
+
+        /// <summary>
+        /// Verification for Login, Show dialog is used to change the application instead of Application.Run, Only on Single Thread
+        /// </summary>
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+            View.Tables.OperatorTable table = new View.Tables.OperatorTable();
+            table.ShowDialog();
+            this.Close();
+        }
     }
 }
+
