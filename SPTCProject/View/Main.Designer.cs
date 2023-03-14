@@ -48,7 +48,6 @@
             this.panel10 = new System.Windows.Forms.Panel();
             this.panel11 = new System.Windows.Forms.Panel();
             this.sideBarTimer = new System.Windows.Forms.Timer(this.components);
-            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.panel2.SuspendLayout();
             this.panel12.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -291,10 +290,6 @@
             this.sideBarTimer.Interval = 5;
             this.sideBarTimer.Tick += new System.EventHandler(this.sideBarTimer_Tick);
             // 
-            // backgroundWorker1
-            // 
-            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -342,6 +337,5 @@
         private System.Windows.Forms.Panel panel12;
         private System.Windows.Forms.Button btnMenu;
         private System.Windows.Forms.Timer sideBarTimer;
-        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
