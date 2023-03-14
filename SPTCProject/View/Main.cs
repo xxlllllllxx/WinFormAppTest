@@ -12,10 +12,11 @@ namespace SPTCProject.View
 {
     public partial class Main : Form
     {
-        bool isMenuOpen = true;
+        bool isMenuOpen;
         public Main()
         {
             InitializeComponent();
+            isMenuOpen = false;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -83,6 +84,11 @@ namespace SPTCProject.View
         private void btnMenu_MouseHover(object sender, EventArgs e)
         {
             btnMenu.PerformClick();
+        }
+
+        private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
+        {
+
         }
     }
 }
